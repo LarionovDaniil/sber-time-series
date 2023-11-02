@@ -16,4 +16,4 @@
 
 # Запуск программы
 - находясь в корне, неободимо прописать:
-  bash bin/run.bash <style color=green> 
+  $${\color{green}bash bin/run.bash}$$

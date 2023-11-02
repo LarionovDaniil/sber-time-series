@@ -5,7 +5,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-with open('../arima2.pkl', 'rb') as pkl:
+with open('arima2.pkl', 'rb') as pkl:
     MODEL = pickle.load(pkl)
 
 
@@ -19,4 +19,4 @@ def predict(months):
     # _validate_predict_params(months=months)
     # модель обчучена на пятидневках
     predictions = MODEL.predict(int(months)*7)
-    return {"date": str(list(predictions.index)), "predict": str(list(predictions.values))}
+    return {"date": str(list(predictions.index)), "predict": list(predictions.values)}

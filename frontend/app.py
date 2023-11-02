@@ -21,7 +21,7 @@ def get_predict(months: int) -> float:
     response_json = response.json()
     date = re.findall("\d{4}-\d{2}-\d{2}", response_json["date"])
     date_index = pd.DatetimeIndex(data=date)
-    predict = eval(response_json["predict"])
+    predict = response_json["predict"]
 
     if response.status_code != 200:
         raise ValueError("Predict failed.")

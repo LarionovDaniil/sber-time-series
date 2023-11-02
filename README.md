@@ -19,3 +19,7 @@
 ```diff
 + bash bin/run.bash
 ```
+- открыть браузер и в поисковой строке написать:
+```diff
+! bash bin/run.bash
+```

@@ -26,6 +26,6 @@ def predict(months: str):
     dict:date and amount of money
 
    """
-    # модель обчучена на пятидневках
+    # модель обучена на пятидневках
     predictions = MODEL.predict(int(months)*7)
     return {"date": str(list(predictions.index)), "predict": list(predictions.values)}

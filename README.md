@@ -16,4 +16,6 @@
 
 # Запуск программы
 - находясь в корне, неободимо прописать:
-  $${\color{green}bash bin/run.bash}$$
+```diff
++ bash bin/run.bash
+```

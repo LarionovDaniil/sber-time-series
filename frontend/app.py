@@ -1,9 +1,9 @@
+"""web page"""
 import re
 import requests
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-
 
 
 df = pd.read_csv('grouped_TS.csv', sep=',',
@@ -17,7 +17,16 @@ axes.plot(df, label="historical data")
 axes.set_ylabel('Стабильная часть средств(мдрд руб)')
 axes.grid()
 
-def get_predict(months_n: int) -> float:
+def get_predict(months_n: int):
+    """get predictions from backend for plot
+
+    Parameters:
+    months_n (int): numbers of months to predict
+
+    Returns:
+    date and prediction value
+
+   """
     response = requests.get(f"http://backend:8000/predict?months={months_n}", timeout=10)
     response_json = response.json()
     dates = re.findall(r"\d{4}-\d{2}-\d{2}", response_json["date"])

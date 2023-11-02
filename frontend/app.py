@@ -1,8 +1,9 @@
+import re
 import requests
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import re
+
 
 
 df = pd.read_csv('grouped_TS.csv', sep=',',
@@ -16,23 +17,23 @@ axes.plot(df, label="historical data")
 axes.set_ylabel('Стабильная часть средств(мдрд руб)')
 axes.grid()
 
-def get_predict(months: int) -> float:
-    response = requests.get(f"http://backend:8000/predict?months={months}")
+def get_predict(months_n: int) -> float:
+    response = requests.get(f"http://backend:8000/predict?months={months_n}", timeout=10)
     response_json = response.json()
-    date = re.findall("\d{4}-\d{2}-\d{2}", response_json["date"])
-    date_index = pd.DatetimeIndex(data=date)
-    predict = response_json["predict"]
+    dates = re.findall(r"\d{4}-\d{2}-\d{2}", response_json["date"])
+    date_index = pd.DatetimeIndex(data=dates)
+    predictions = response_json["predict"]
 
     if response.status_code != 200:
         raise ValueError("Predict failed.")
-    return date_index, predict
+    return date_index, predictions
 
 
 st.title("SBER Time Series")
 
 months = st.slider(label="Горизонт предсказания(мес.)", min_value=1, max_value=12, value=1)
 
-date, predict = get_predict(months=months)
+date, predict = get_predict(months_n=months)
 series = pd.Series(data=predict, index=date)
 axes.plot(series, 'g')
 axes.set_ylim(0)

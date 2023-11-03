@@ -6,16 +6,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-df = pd.read_csv('grouped_TS.csv', sep=',',
-                 index_col=['REPORTDATE'], parse_dates=['REPORTDATE'])
+st.title("SBER Time Series")
+months = st.slider(label="Горизонт предсказания(мес.)", min_value=1, max_value=12, value=1)
 
-df["VALUE"] /= 1e9
-
-plt.style.use('dark_background')
-figure, axes = plt.subplots(1, 1)
-axes.plot(df)
-axes.set_ylabel('Стабильная часть средств(мдрд руб)')
-axes.grid()
 
 def get_predict(months_n: int):
     """get predictions from backend for plot
@@ -38,12 +31,24 @@ def get_predict(months_n: int):
     return date_index, model_predictions
 
 
-st.title("SBER Time Series")
+def draw_plot():
+    """plot drawing"""
+    df = pd.read_csv('grouped_TS.csv', sep=',',
+                 index_col=['REPORTDATE'], parse_dates=['REPORTDATE'])
 
-months = st.slider(label="Горизонт предсказания(мес.)", min_value=1, max_value=12, value=1)
+    df["VALUE"] /= 1e9
 
-date, predict = get_predict(months_n=months)
-series = pd.Series(data=predict, index=date)
-axes.plot(series, 'g')
-axes.set_ylim(0)
-st.pyplot(figure)
+    date, predict = get_predict(months_n=months)
+    series = pd.Series(data=predict, index=date)
+
+    plt.style.use('dark_background')
+    figure, axes = plt.subplots(1, 1)
+    axes.plot(df)
+    axes.plot(series, 'g')
+    axes.set_ylabel('Стабильная часть средств(мдрд руб)')
+    axes.set_ylim(0)
+    axes.grid()
+    st.pyplot(figure)
+
+
+draw_plot()

@@ -12,11 +12,11 @@ jobs:
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v3"
-      - name: "Install Python==3.11"
+      - name: "Install Python"
         uses: "actions/setup-python@v4"
         with:
-          python-version: "{{ cookiecutter.python_version }}"
+          python-version: "3.11"
       - name: "Install dependencies"
-        run: "pip install -r requirements.txt"
+        run: "pip install -r requirements-dev.txt"
       - name: "Lint"
-        run: "pylint <source>"
+        run: "pylint frontend backend"

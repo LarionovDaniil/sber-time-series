@@ -21,4 +21,4 @@
 ```bash
 docker compose up --build -d
 ```
-- открыть браузер и в поисковой строке написать: `localhost:8501`
+- в браузере написать: `localhost:8501`

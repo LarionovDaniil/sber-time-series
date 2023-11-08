@@ -1,0 +1,19 @@
+---
+name: Deploy to server
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Deploy"
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+        script: |
+          git clone git@github.com:nickuzmenkov/sber-time-series.git
+          cd sber-time-series
+          docker-compose up --build -d

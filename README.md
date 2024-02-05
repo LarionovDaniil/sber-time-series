@@ -18,6 +18,7 @@
 
 ## Скачивание весов модели
 - После клонирования репозитория необходимо скачать веса модели в backend
+'https://drive.google.com/file/d/1HSu9QKOUXhwf1-IkkMEAul1-J_zXkABz/view?usp=sharing'
 ## Запуск программы
 - находясь в корне, прописать:
 ```bash

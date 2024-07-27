@@ -25,3 +25,5 @@
 docker compose up --build -d
 ```
 - в браузере написать: `localhost:8501`
+![9f586634-1024-471c-b013-821509c91198](https://github.com/user-attachments/assets/38faa909-567a-4563-984f-55072878a030)
+
